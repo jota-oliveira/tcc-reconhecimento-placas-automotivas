@@ -1,0 +1,341 @@
+% ------------------------------------------------------------------------
+% Modelo de Trabalho de Conclusão de Curso em conformidade com 
+% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
+% Apresentacao
+% ------------------------------------------------------------------------
+
+\documentclass[12pt, oneside, a4paper, brazil]{abntex2}
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+\usepackage{listingsutf8}       % Inclusão de códigos
+\usepackage{amsmath}            
+
+% Configuração do pacote listingutf8
+\def\lstlistingname{Código}
+\def\lstlistlistingname{Lista de Códigos}
+\lstset{
+    numbers=left,
+    stepnumber=1,
+    firstnumber=1,
+    numberstyle=\small,
+    captionpos=t,
+    numberbychapter=false,
+    numberfirstline=true,
+    numberblanklines=false,
+    extendedchars=true,
+    inputencoding=utf8,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1 {ã}{{\~a}}1 {õ}{{\~o}}1,
+    breaklines=true,
+    frame=single,
+    basicstyle=\footnotesize,
+    stringstyle=\ttfamily,
+    showstringspaces=false,
+    xleftmargin=10mm,
+    numbersep=7mm
+}
+
+\newcommand*\cpp{C\kern-0.2ex\raisebox{0.4ex}{\scalebox{0.8}{+\kern-0.4ex+}}}
+
+
+% Informações de dados para CAPA e FOLHA DE ROSTO
+\titulo{Reconhecimento de caracteres de placa veícular fazendo uso de visão computacional}
+\autor{João Henrique de Oliveira Júnior}
+\local{Araquari -- SC}
+\data{Setembro de 2015}
+\orientador{Prof. Dr. Eduardo da Silva}
+\coorientador{Prof. Dr. Paulo César F. de Oliveira}
+\instituicao{%
+  Instituto Federal Catarinense -- IFC
+  \par
+  Câmpus Araquari
+  \par
+  Bacharelado em Sistemas de Informação}
+\tipotrabalho{Monografia (Graduação)}
+% Preâmbulo antes da aprovação
+\preambulo{Este trabalho de conclusão de curso será apresentado ao Instituto Federal de Educação, Ciência e Tecnologia Catarinense como requisito parcial para a obtenção do grau de Bacharel em Sistemas de Informação sob orientação do \imprimirorientador.}
+% Preâmbulo após a aprovação
+\preambulo{Trabalho de conclusão de curso apresentado ao Instituto Federal Catarinense - Câmpus Araquari como requisito parcial para a obtenção do grau de Bacharel em Sistemas de Informação sob orientação do professor \imprimirorientador.}
+
+% Configurações de aparência do PDF final
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,            % false: boxed links; true: colored links
+    	linkcolor=blue,             % color of internal links
+    	citecolor=blue,             % color of links to bibliography
+    	filecolor=magenta,          % color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+% Espaçamentos entre linhas e parágrafos 
+\setlength{\parindent}{1.3cm}			% O tamanho do parágrafo é dado por:
+\setlength{\parskip}{0.2cm}  			% Controle do espaçamento entre um parágrafo e outro:
+
+
+% Início do documento
+\begin{document}
+%\selectlanguage{english}
+\selectlanguage{brazil} 				% Seleciona o idioma do documento (conforme pacotes do babel)
+\frenchspacing 							% Retira espaço extra obsoleto entre as frases.
+
+% ELEMENTOS PRÉ-TEXTUAIS
+\imprimircapa							% Capa
+\imprimirfolhaderosto*					% Folha de rosto
+								% (o * indica que haverá a ficha bibliográfica)
+
+% Inserir a ficha bibliografica
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de 
+% catalogação-na-publicação''. Utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca fornecerá um PDF com a ficha catalográfica 
+% definitiva após a defesa do trabalho. Quando estiver com o documento, salve-o como PDF 
+% no diretório do seu projeto e substitua todo o conteúdo de implementação deste arquivo 
+% pelo comando abaixo:
+%
+% \begin{fichacatalografica}
+%     \includepdf{fig_ficha_catalografica.pdf}
+% \end{fichacatalografica}
+
+\begin{fichacatalografica}
+	\sffamily
+	\vspace*{\fill}					% Posição vertical
+	\begin{center}					% Minipage Centralizado
+	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+	\small
+	\imprimirautor
+	%Sobrenome, Nome do autor
+	
+	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+	\imprimirlocal, \imprimirdata-
+	
+	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+	
+	\hspace{0.5cm}
+	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+	\imprimirdata.}\\
+	
+	\hspace{0.5cm}
+		1. Visão computacional.
+		2. OCR.
+		2. Inteligência artificial.
+		I. Orientador.
+		II. Instituto Federal Catarinense.
+		III. Câmpus Araquari.
+	\end{minipage}}
+	\end{center}
+\end{fichacatalografica}
+% ---
+
+% Inserir folha de aprovação
+
+% Exemplo de Folha de aprovação, elemento obrigatório da NBR 14724/2011 (seção 4.2.1.3). 
+% Utilizar este modelo até a aprovação do trabalho. Após isso, substitua todo o conteúdo 
+% deste arquivo por uma imagem da página assinada pela banca com o comando abaixo:
+%
+% \includepdf{folhadeaprovacao_final.pdf}
+%
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+        
+   Trabalho aprovado. \imprimirlocal, 24 de novembro de 2012:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+   \assinatura{\textbf{\imprimircoorientador} \\ Coorientador}
+   \assinatura{\textbf{Professor} \\ Convidado 1}
+   \assinatura{\textbf{Professor} \\ Convidado 2}
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+% ---
+
+% Dedicatória
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{ Dedico esse trabalho de conclusão de curso a Deus \\
+   pois Ele é digno de mais essa vitória.} \vspace*{\fill}
+\end{dedicatoria}
+
+
+% Agradecimentos
+\begin{agradecimentos}
+Agradeço a Jesus Cristo, a razão da minha existência, sem Ele nada eu teria ou seria. Agradeço também a minha família que sempre me apoiou, e a minha noiva Nicole, presente do Senhor para minha vida. Agradeço também ao orientador Eduardo da Silva por ter acreditado nesse trabalho.
+\end{agradecimentos}
+
+% Epígrafe
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+		\textit{"E tudo quanto fizerdes, fazei-o de todo o coração, como para o Senhor e não para homens"(Bíblia sagrada)}
+	\end{flushright}
+\end{epigrafe}
+
+% RESUMOS
+% resumo em português
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+Este trabalho trata-se da implementação de uma solução para reconhecimento de placa automotiva. Partindo do princípio que um computador não pode interpretar imagens como um ser humano, torna-se necessária a implementação de códigos que busquem emular a visão humana. Todo sistema que busca tal objetivo é chamado de sistema de visão computacional, que é uma área da inteligência artificial. Para a conclusão deste trabalho, foram utilizadas as bibliotecas OpenCV 3.0, GOCR e OCRAD, sendo que o OpenCV trata-se de uma biblioteca de visão computacional, e a GOCR e OCRAD são bibliotecas de OCR(Optical character recognition). O resultado obtido desse trabalho é de 50\% de taxa de acerto devido a questões que são exploradas no capítulo 4 e na conclusão, podendo ser implementado por qualquer outro pesquisador. Todas as soluções são de licença gratuita, incluindo a plataforma onde a solução é executada. 
+
+ \textbf{Palavras-chave}: OCR, Visão Computacional, Inteligência Artificial, OpenCV, GOCR, OCRAD, caracter.
+\end{resumo}
+
+% resumo em inglês
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+ 
+This work envisages the implementation of licence plate recognition solution. Assuming that a computer is not able to interpret images as a human, it is necessary an implementation of codes that try to emulate the human vision. All system that has this goal is called of computer vision system, that is an area of artificial intelligence. For the conclusion of this work, the libraries OpenCV 3.0, GOCR and OCRAD were used, in which the OpenCV is a library of computer vision, while the GOCR and OCRAD are OCR(Optical character recognition) libraries. The obtained result in this work, is of 50\% of hit ratio due to some arguments that will be explored in the chapter 4 and in the conclusion, which may be implemented for any other research. All the solutions has free licence, including the platform where the solution is executing.   \vspace{\onelineskip}
+ 
+   \noindent 
+   \textbf{Keywords}: OCR, Computer vision, Artificial intelligence, OpenCV, GOCR, OCRAD, character.
+ \end{otherlanguage*}
+\end{resumo}
+
+% inserir lista de ilustrações
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures
+\cleardoublepage
+
+% inserir lista de tabelas
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables
+\cleardoublepage
+
+\lstlistoflistings
+\cleardoublepage
+
+% inserir lista de abreviaturas e siglas
+\begin{siglas}
+  \item[HSV] Hue Saturation Value
+  \item[OCR] Optical Character Recognition
+  \item[RGB] Red Green Blue
+  \item[OpenCV] Open Computer Vision
+  \item[OffOCR] Offline Optical Character Recognition
+  \item[OnOCR] Online Optical Character Recognition
+\end{siglas}
+
+
+% inserir o sumario
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+
+% ELEMENTOS TEXTUAIS
+\textual
+
+\include{introducao}
+\include{cap2}
+\include{cap3}
+\include{cap4}
+
+
+% ----------------------------------------------------------
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ----------------------------------------------------------
+\phantompart
+
+% ---
+% Conclusão
+% ---
+\chapter{Conclusão}
+% ---
+
+Com esse trabalho, pode-se concluir de que essa solução não atingiu a eficiência desejada, porém há formas de conseguir melhorias significativas para os resultados. Alguns meios propostos para melhorar essa solução são o de aderir um filtro que cause o efeito visual de embaçamento, para que as letras da cidade e estado fiquem ilegíveis para o sistema, evitando letras que não correspondem a área de interesse serem encontradas. O outro meio de melhorar os resultados é aperfeiçoar a inteligência do código propriamente dito. Destaca-se o fato de que a solução não faz uso de nenhum tipo de treinamento para encontrar os caracteres. 
+
+Além das propostas de melhoramento, vale atentar para o fato de que essa solução foi feita em uma plataforma, sistema operacional, linguagem e bibliotecas de licença gratuíta, permitindo com que qualquer estudante ou pesquisador possa fazer uso e continuar os estudos. O OpenCV foi uma ferramenta que facilitou muito as aplicações de efeitos de processamento de imagens e ainda extende-se a capacidade de efetuar aplicações em tempo real, além de sua integração com o Python e outras linguagens ser simples. As OCRs utilizadas conseguiram resultados razoavelmente bons, considerando que visualmente as letras e números foram detectadas em quase 100\% das placas, mas da forma em que se encontra a solução a respeito da decisão de quais são os caracteres de interesse, não foram suficientes, e dessa forma existe a possibilidade do Tesseract desempenhar melhor.
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{bibliografia}
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+% ---
+\chapter{Código completo}
+% ---
+
+\lstinputlisting[language=Python,caption={Código final - Tratamento da imagem},label=mediapy]{codigos/implementacao4.py}
+
+\lstinputlisting[language=Python,caption={Código final - Remoção de ruídos},label=mediapy]{codigos/remocao_ruidos.py}
+
+\lstinputlisting[language=Python,caption={Código final - Comparador de saídas},label=mediapy]{codigos/comparador.py}
+\end{anexosenv}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}
