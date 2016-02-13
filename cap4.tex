@@ -84,7 +84,9 @@ Ordem & Leitura & Filtro Aplicado & Escrita &
 
 \lstinputlisting[language=Python,caption={Código da Solução III - Função de Tratamento},label=mediapy]{codigos/implementacao2.py}
 
-Depois de aplicados os filtros, as imagens salvas ficam como as que estão representadas na \autoref{fig:Imagens após o tratamento}. Dessa forma, as imagens geram resultados muito melhores ao passar pelas OCRs, sendo que quando a imagem original é passada pelas OCRs, praticamente não são encontrados os caracteres. Pode-se então passar para a próxima etapa, que é a de leitura OCR. Cada imagem salva passará pela leitura OCR, pois pode ser que as letras e os números de interesse sejam encontrados em um filtro, e não em outro. 
+Depois de aplicados os filtros, as imagens salvas ficam como as que estão representadas na \autoref{fig:Imagens após o tratamento}. Essas imagens tratadas geram resultados muito melhores ao passar pelas OCRs, sendo que quando a imagem original não tratada é passada pelas OCRs, praticamente não são encontrados os caracteres. 
+
+Assim é possível iniciar a próxima etapa, que é a de leitura OCR. Cada imagem salva passará pela leitura OCR, pois existe a possibilidade de que as letras e os números de interesse sejam encontrados em um filtro, e não em outro. 
 
 \begin{figure}[htbp]
 \caption{\label{fig:Imagens após o tratamento}Imagens após o tratamento da placa via OpenCV e Python}
@@ -94,7 +96,7 @@ Depois de aplicados os filtros, as imagens salvas ficam como as que estão repre
 \legend{Fonte: o autor}
 \end{figure}
 
-A leitura OCR é simples de fazer; basta importar a biblioteca \textit{commands} do Python e executar o comando de leitura OCR que pode ser executado também no terminal do Ubuntu. A biblioteca \textit{commands} permite executar comandos no sistema operacional. O Código 15 é uma função onde busca as saídas da leitura OCR.
+A execução da leitura OCR através do Python é simples de fazer; basta importar a biblioteca \textit{commands} e executar o comando de leitura OCR que pode ser executado também no terminal do Linux. A biblioteca \textit{commands} permite a execução de quaisquer comandos do sistema operacional. O Código 15 é uma função de busca das saídas da leitura OCR.
 
 \lstinputlisting[language=Python,caption={Código da Solução IV - Função de leitura OCR},label=mediapy]{codigos/implementacao3.py}
 
@@ -179,7 +181,7 @@ Limiarização GOCR & JC &
 \legend{Fonte: o autor}
 \end{figure}
 
-Nesse caso, onde houverem no mínimo três caracteres, o resultado será os três primeiros, porém nem sempre os três primeiros serão as letras da placa, podendo ser uma letra da cidade ou estado como dito anteriormente. Para os números o processo é semelhante, há uma limpeza de todas as letras e outros caracteres, deixando apenas os números e as letras que são geralmente confundidas(Figura 15) já substituídas pelo possível valor correto. No caso dos números, há taxa de acerto consideravelmente boa. O Código 14 demonstra um exemplo de função de limpeza para letras. Nesse código é utilizado somente a linguagem de programação, sem bibliotecas específicas para auxílio da tarefa.
+Nesse caso, onde houver no mínimo três caracteres, o resultado será os três primeiros, porém nem sempre os três primeiros serão as letras da placa, podendo ser uma letra da cidade ou estado como descrito anteriormente. Para os números o processo é semelhante, há uma limpeza de todas as letras e outros caracteres, deixando apenas os números e as letras que são geralmente confundidas(Figura 15) já substituídas pelo possível valor correto. No caso dos números, há uma taxa de acerto maior em relação as letras. O Código 14 demonstra um exemplo de função de limpeza para letras. Nesse código é utilizado somente a linguagem de programação, sem bibliotecas específicas para auxílio da tarefa.
 
 \lstinputlisting[language=Python,caption={Código da Solução V - Exemplo de limpeza de letras},label=mediapy]{codigos/implementacao3-1.py}
 
@@ -187,7 +189,15 @@ Dessa forma, o último passo é juntar os resultados e retornar a resposta, apó
 
 \section{Resultados}
 
-Essa sessão apresentará os resultados parciais, considerando que a solução pode ser continuada e melhorada. A Tabela 1 mostra a taxa de acerto de três maneiras sendo elas a placa completa, somente as letras e somente os números. A taxa de acerto pode ser considerada baixa, devido ao problema citado na sessão anterior a respeito das letras que pertencem ao estado e a cidade contidos na placa. Não existindo um padrão de respostas, as letras podem estar em qualquer lugar, bem como os números, entretanto foram encontradas as letras e os números correspondentes a placa de maneira visual em todas as placas testadas, tendo em vista isso, uma solução seria encontrar um filtro ou efeito que de certa forma, causasse o efeito visual de embaçamento, fazendo assim com que as pequenas letras tornassem-se ilegíveis para o sistema.  
+Essa sessão apresentará os resultados parciais, considerando que a solução pode ser continuada e melhorada. 
+
+A Tabela 1 mostra a taxa de acerto de três maneiras, sendo elas a placa completa, somente as letras e somente os números. Foram testadas trinta e cinco placas, em condições climáticas diferentes e em movimentação, fazendo uso de dispositivos móveis com no máximo oito \textit{megapixels}. A taxa de acerto pode ser considerada baixa, devido ao problema citado na sessão anterior a respeito das letras que pertencem ao estado e a cidade contidos na placa. 
+
+Não existe um padrão de respostas, as letras podem estar em qualquer posição, misturadas entre outros conteúdos que não são de interesse. Os números também tem o mesmo problema. 
+
+Apesar das questões citadas foram encontradas as letras e os números correspondentes a placa de maneira visual, ou seja, ao verificar as saídas OCR uma a uma, é possível identificar de que os resultados estão envolvidos nessas saídas, e isso acontece em todas as placas. 
+
+Tendo em vista isso, uma solução seria encontrar um filtro ou efeito que de certa forma, causasse o efeito visual de embaçamento, fazendo assim com que as pequenas letras tornassem-se ilegíveis para o sistema.  
 
 \begin{table}[htbp]
 \centering
@@ -208,6 +218,8 @@ Números & 30 & 4 & 88.23\% &
 \legend{Fonte: o autor}
 \end{table}
 
-Para a questão dos números, a taxa de acerto pode ser considerada boa, obtendo quase 90\%. Aprimorar o algoritmo de decisão de números seria um passo essencial, pois alguns erros provém de letras encontradas próximas aos números, que geralmente são confundidas, como por exemplo a letra ``l'' com o número ``1''. Caso haja por exemplo uma saída semelhante a ``ABC l \_ ?1234'', ao limpar para encontrar apenas os números e ao substituir a letra ``l'' por ``1'', os quatro primeiros valores seriam ``1123'' e não ``1234'', e também, se esse ``l'' estivesse por entre o ``3'' e o ``4'' devido a algum pixel indejesado(que pode ser causado por ausência ou excesso de luz, ou uma série de outros fatores), o resultado seria ``1231''. Pode haver também o caso de um número não ser encontrado, obtendo apenas três números em vez de quatro.
+Para a questão dos números, a taxa de acerto pode ser considerada boa, obtendo quase 90\%. Aprimorar o algoritmo de decisão de números seria um passo essencial, pois alguns erros provém de letras encontradas próximas aos números, que geralmente são confundidas, como por exemplo a letra ``l'' com o número ``1''. 
+
+Caso haja por exemplo uma saída semelhante a ``ABC l \_ ?1234'', ao limpar para encontrar apenas os números e ao substituir a letra ``l'' por ``1'', os quatro primeiros valores seriam ``1123'' e não ``1234'', e também, se esse ``l'' estivesse por entre o ``3'' e o ``4'' devido a algum pixel indejesado(que pode ser causado por ausência ou excesso de luz, ou uma série de outros fatores), o resultado seria ``1231''. Pode haver também o caso de um número não ser encontrado, obtendo apenas três números em vez de quatro.
 
 Assim, o capítulo de desenvolvimento está finalizado, todas as conclusões e sugestões para continuação dessa solução, estarão disponíveis no próximo capítulo. O códigos que foram apresentados nesse capítulo não exatamente os que estão presentes na solução, porém como já informado no início do capítulo, nos anexos estará disponível o código completo.   
